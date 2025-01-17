@@ -1,6 +1,7 @@
 import {Metadata} from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import TableRiwayat from "@/components/Tables/TableRiwayat";
 
 export const metadata: Metadata = {
     title: "Pengembalian Barang",
@@ -13,7 +14,7 @@ export default function Home() {
             <DefaultLayout>
                 <Breadcrumb pageName="Riwayat"/>
 
-                <h1>Riwayat</h1>
+                <TableRiwayat/>
             </DefaultLayout>
         </>
     );

@@ -3,7 +3,6 @@
 import React from "react";
 import CardDataStats from "../CardDataStats";
 import TableBeranda from "@/components/Tables/TableBeranda";
-import { Metadata } from "next";
 
 // const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
 //   ssr: false,
