@@ -16,10 +16,10 @@ const peminjamanData: PEMINJAMAN[] = [
 const TableBeranda = () => {
     return (
         <div
-            className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-            <div className="mb-6 flex flex-wrap items-center justify-between">
-                <h4 className="text-xl font-semibold text-black dark:text-white">
-                    Jadwal Peminjaman
+            className="rounded-sm border  bg-white border-stroke px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+            <div className="mb-6 flex flex-wrap items-center justify-between bg-red-700 px-10 py-5">
+                <h4 className="text-xl font-semibold dark:text-black text-white">
+                    Peminjaman Berakhir
                 </h4>
                 <div className="flex">
                     <input

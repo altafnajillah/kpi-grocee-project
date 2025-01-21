@@ -121,7 +121,7 @@ const menuGroups = [
             />
           </svg>
         ),
-        label: "Pengguna",
+        label: "Manajemen Pengguna",
         route: "/auth/signup",
       },
       {

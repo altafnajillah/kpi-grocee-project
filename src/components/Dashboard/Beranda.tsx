@@ -3,6 +3,7 @@
 import React from "react";
 import CardDataStats from "../CardDataStats";
 import TableBeranda from "@/components/Tables/TableBeranda";
+import TablePeminjamanBerakhir from "@/components/Tables/TablePeminjamanBerakhir";
 
 // const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
 //   ssr: false,
@@ -77,7 +78,7 @@ const Beranda: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Banyak Pengajuan" total="15" satuan="Ajuan">
+        <CardDataStats title="Tindak Lanjut" total="1" satuan="Peminjaman">
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -103,14 +104,14 @@ const Beranda: React.FC = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        {/*<ChartOne />*/}
-        {/*<ChartTwo />*/}
-        {/*<ChartThree />*/}
-        {/*<MapOne />*/}
+        <div className="col-span-12">
+          <TablePeminjamanBerakhir />
+        </div>
+      </div>
+      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <div className="col-span-12">
           <TableBeranda />
         </div>
-        {/*<ChatCard />*/}
       </div>
     </div>
   );

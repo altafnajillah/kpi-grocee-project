@@ -3,8 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Halaman Login",
-  description: "Silahkan login untuk mengelola pengajuan",
+  title: "SIMBA | Halaman Login",
 };
 
 const SignIn: React.FC = () => {
@@ -18,11 +17,11 @@ const SignIn: React.FC = () => {
                 <span className="block font-medium">Selamat Datang</span>
                 <Link
                   href={"/"}
-                  className="ml-auto rounded-md bg-primary px-3 py-1 text-white hover:bg-blue-500"
+                  className="ml-auto rounded-md bg-red-700 px-3 py-1 text-white hover:bg-opacity-90"
                 >
                   Kembali
                 </Link>
-                <h2 className="mb-9 w-full text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+                <h2 className="mb-4 w-full text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                   Silahkan login ke SIMBA!
                 </h2>
                 <form className="w-full">
@@ -33,7 +32,7 @@ const SignIn: React.FC = () => {
                     <input
                       type="email"
                       placeholder="Masukkan email"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-red-700 focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-red-700"
                     />
                   </div>
                   <div className="mb-6">
@@ -43,24 +42,14 @@ const SignIn: React.FC = () => {
                     <input
                       type="password"
                       placeholder="Silahkan masukkan kata sandi"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-red-700 focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-red-700"
                     />
                   </div>
-                  <div className="mb-5">
-                    <input
-                      type="submit"
-                      value="Login"
-                      className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                    />
-                  </div>
-                  <div className="mt-6 text-center">
-                    <p>
-                      Belum punya akun?{" "}
-                      <span className="font-bold text-primary">
-                        Hubungi admin
-                      </span>
-                    </p>
-                  </div>
+                  <input
+                    type="submit"
+                    value="Login"
+                    className="w-full cursor-pointer rounded-lg border border-red-700 bg-red-700 p-4 text-white transition hover:bg-opacity-90"
+                  />
                 </form>
               </div>
             </div>
