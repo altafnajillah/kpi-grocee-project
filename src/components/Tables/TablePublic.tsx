@@ -24,7 +24,7 @@ const TablePublic = () => {
                 <div className="flex">
                     <input
                         type="text"
-                        placeholder="Apa yang akan dicari?..."
+                        placeholder="Cari peminjaman..."
                         className="w-full mr-2 rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
                     <button className="bg-primary px-4 py-2 text-white rounded-md" >
@@ -96,6 +96,6 @@ const TablePublic = () => {
             </div>
         </div>
     );
-};
+}
 
 export default TablePublic;

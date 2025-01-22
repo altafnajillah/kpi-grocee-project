@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import TableBeranda from "@/components/Tables/TableBeranda";
 import React from "react";
 import PublicLayout from "@/components/Layouts/PublicLayout";
+import TablePublic from "@/components/Tables/TablePublic";
 
 export const metadata: Metadata = {
   title: "SIMBA | Beranda Peminjaman",
@@ -9,17 +9,19 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-      <PublicLayout>
-        <div
-            className="relative h-screen bg-[url('/images/bg/unsulbar9.jpeg')] bg-cover"
-        >
-          <div className="absolute inset-0 bg-black opacity-50 z-10"></div> {/* Ini untuk lapisan gelap */}
-          <div className="relative z-20 mb-6 flex w-full">
-          </div>
-          <div className="relative z-20 flex items-center justify-center">
-            <TableBeranda />
+    <PublicLayout>
+      <div className="h-screen bg-[url('/images/bg/unsulbar9.jpeg')] bg-cover pt-5">
+        {/*<div className="flex items-center justify-center">*/}
+        {/*  <TablePublic />*/}
+        {/*</div>*/}
+        <div className="flex items-center justify-center">
+          <div className="mt-4 max-w-7xl grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+            <div className="col-span-12">
+              <TablePublic />
+            </div>
           </div>
         </div>
-      </PublicLayout>
+      </div>
+    </PublicLayout>
   );
 }

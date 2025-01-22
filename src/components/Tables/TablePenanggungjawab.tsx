@@ -2,19 +2,20 @@ import Link from "next/link";
 import React from "react";
 import {IoDocumentText} from "react-icons/io5";
 import {BARANG} from "@/types/barang";
+import {PENANGGUNGJAWAB} from "@/types/penanggungjawab";
 
-const barangData: BARANG[] = [
+const pjData: PENANGGUNGJAWAB[] = [
     {
-        id: "KEN0001",
-        name: "Bus Unsulbar DC 2121 B",
-        pj: "Altaf Najillah",
-        stok: 1,
+        id: 1,
+        name: "Altaf Najillah",
+        notelp: "081234567890",
+        alamat: "Tinambung",
     },
     {
-        id: "RUA0001",
-        name: "Ruang Teater GK A",
-        pj: "Hasnur",
-        stok: 1,
+        id: 2,
+        name: "Hasnur",
+        notelp: "082134567890",
+        alamat: "Lembang, Majene",
     }
 ];
 
@@ -23,13 +24,13 @@ const TablePendaftaran = () => {
         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
             <div className="mb-6 flex flex-wrap items-center justify-between">
                 <h4 className="text-xl font-semibold text-black dark:text-white">
-                    Daftar Barang
+                    Daftar Penanggungjawab
                 </h4>
                 <Link
                     href={"/"}
                     className="ml-auto rounded-sm bg-warning text-white px-2 py-1 hover:bg-warning-600"
                 >
-                    Tambah Barang
+                    Tambah PJ
                 </Link>
             </div>
 
@@ -39,22 +40,17 @@ const TablePendaftaran = () => {
                     <tr className="bg-gray-2 dark:bg-meta-4">
                         <th className="p-2.5 text-left xl:p-5">
                             <h5 className="text-sm font-medium uppercase xsm:text-base">
-                                ID
-                            </h5>
-                        </th>
-                        <th className="p-2.5 text-left xl:p-5">
-                            <h5 className="text-sm font-medium uppercase xsm:text-base">
                                 Nama
                             </h5>
                         </th>
                         <th className="p-2.5 text-left xl:p-5">
                             <h5 className="text-sm font-medium uppercase xsm:text-base">
-                                Penanggung Jawab
+                                Alamat
                             </h5>
                         </th>
                         <th className="p-2.5 text-left xl:p-5">
                             <h5 className="text-sm font-medium uppercase xsm:text-base">
-                                Stok
+                                No. Telpon
                             </h5>
                         </th>
                         <th className="p-2.5 text-left xl:p-5">
@@ -65,20 +61,15 @@ const TablePendaftaran = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {barangData.map((data, key) => (
+                    {pjData.map((data, key) => (
                         <tr
                             key={key}
                             className={`${
-                                key === barangData.length - 1
+                                key === pjData.length - 1
                                     ? ""
                                     : "border-b border-stroke dark:border-strokedark"
                             }`}
                         >
-                            <td className="p-2.5 xl:p-5">
-                                <p className="text-black dark:text-white">
-                                    {data.id}
-                                </p>
-                            </td>
                             <td className="p-2.5 xl:p-5">
                                 <p className="text-black dark:text-white">
                                     {data.name}
@@ -86,12 +77,12 @@ const TablePendaftaran = () => {
                             </td>
                             <td className="p-2.5 xl:p-5">
                                 <p className="text-black dark:text-white">
-                                    {data.pj}
+                                    {data.alamat}
                                 </p>
                             </td>
                             <td className="p-2.5 xl:p-5">
                                 <p className="text-black dark:text-white">
-                                    {data.stok}
+                                    {data.notelp}
                                 </p>
                             </td>
                             <td className="p-2.5 xl:p-5">
