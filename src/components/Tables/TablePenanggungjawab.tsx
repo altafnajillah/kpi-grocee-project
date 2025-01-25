@@ -1,25 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import {IoDocumentText} from "react-icons/io5";
-import {BARANG} from "@/types/barang";
-import {PENANGGUNGJAWAB} from "@/types/penanggungjawab";
+import { IoDocumentText } from "react-icons/io5";
+import { getPjBarang } from "@/lib/pjbarang";
 
-const pjData: PENANGGUNGJAWAB[] = [
-    {
-        id: 1,
-        name: "Altaf Najillah",
-        notelp: "081234567890",
-        alamat: "Tinambung",
-    },
-    {
-        id: 2,
-        name: "Hasnur",
-        notelp: "082134567890",
-        alamat: "Lembang, Majene",
-    }
-];
 
-const TablePendaftaran = () => {
+const TablePendaftaran = async () => {
+    const pjBarang = await getPjBarang();
+
     return (
         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
             <div className="mb-6 flex flex-wrap items-center justify-between">
@@ -61,14 +48,10 @@ const TablePendaftaran = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {pjData.map((data, key) => (
+                    {   // @ts-ignore
+                        pjBarang.map((data) => (
                         <tr
-                            key={key}
-                            className={`${
-                                key === pjData.length - 1
-                                    ? ""
-                                    : "border-b border-stroke dark:border-strokedark"
-                            }`}
+                            key={data.id}
                         >
                             <td className="p-2.5 xl:p-5">
                                 <p className="text-black dark:text-white">
@@ -87,9 +70,9 @@ const TablePendaftaran = () => {
                             </td>
                             <td className="p-2.5 xl:p-5">
                                 <div className="flex">
-                                    <Link href={"#"} className="bg-success p-2 rounded-sm text-white ml-1">
+                                    <button className="bg-success p-2 rounded-sm text-white ml-1">
                                         <IoDocumentText size={20}/>
-                                    </Link>
+                                    </button>
                                 </div>
                             </td>
                         </tr>

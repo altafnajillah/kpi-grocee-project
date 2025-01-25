@@ -13,7 +13,7 @@ interface pjBarang {
     alamat: string;
 }
 
-export default function PjBarang() {
+export default function DevPage() {
     const [data, setData] = useState<pjBarang[]>([]);
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function PjBarang() {
                             Daftar Penanggungjawab
                         </h4>
                         <Link
-                            href={"/penanggungjawab/create"}
+                            href={"/dev/create"}
                             className="ml-auto rounded-sm bg-warning text-white px-2 py-1 hover:bg-warning-600"
                         >
                             Tambah PJ
@@ -73,24 +73,24 @@ export default function PjBarang() {
                                 <tr
                                     key={datum.id}
                                 >
-                                    <td className="border-b border-[#eee] p-2.5 xl:p-5">
+                                    <td className="p-2.5 xl:p-5">
                                         <p className="text-black dark:text-white">
                                             {datum.name}
                                         </p>
                                     </td>
-                                    <td className="border-b border-[#eee] p-2.5 xl:p-5">
+                                    <td className="p-2.5 xl:p-5">
                                         <p className="text-black dark:text-white">
                                             {datum.notelp}
                                         </p>
                                     </td>
-                                    <td className="border-b border-[#eee] p-2.5 xl:p-5">
+                                    <td className="p-2.5 xl:p-5">
                                         <p className="text-black dark:text-white">
                                             {datum.alamat}
                                         </p>
                                     </td>
-                                    <td className="border-b border-[#eee] p-2.5 xl:p-5">
+                                    <td className="p-2.5 xl:p-5">
                                         <div className="flex">
-                                            <Link href={`/penanggungjawab/${datum.id}`} className="bg-success p-2 rounded-sm text-white ml-1">
+                                            <Link href={`/dev/${datum.id}`} className="bg-success p-2 rounded-sm text-white ml-1">
                                                 <IoDocumentText size={20}/>
                                             </Link>
                                         </div>

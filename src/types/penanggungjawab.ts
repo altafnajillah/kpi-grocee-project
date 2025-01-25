@@ -1,6 +1,6 @@
 export type PENANGGUNGJAWAB = {
     id: number;
-    name: string;
+    nama: string;
     notelp: string;
     alamat: string;
 };
