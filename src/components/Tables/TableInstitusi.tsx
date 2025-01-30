@@ -1,26 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { BsPencilSquare } from "react-icons/bs";
 import React, { useEffect, useState } from "react";
-import { IoDocumentText } from "react-icons/io5";
 
-interface Barang {
-  id: string;
+interface Institusi {
+  id: number;
   name: string;
-  stok: string;
-  pj: { name: string };
 }
 
-const TablePendaftaran = () => {
-  const [data, setData] = useState<Barang[]>([]);
+export default function TableInstitusi() {
+  const [data, setData] = useState<Institusi[]>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/api/barang");
+      const response = await fetch("/api/institutions");
       const data = await response.json();
       setData(data);
     }
-
     fetchData().then();
   }, []);
 
@@ -28,13 +25,13 @@ const TablePendaftaran = () => {
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="mb-6 flex flex-wrap items-center justify-between">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Daftar Barang
+          Daftar Institusi
         </h4>
         <Link
-          href={"/barang/pendaftaran/create"}
+          href={"/institusi/create"}
           className="hover:bg-warning-600 ml-auto rounded-sm bg-warning px-2 py-1 text-white"
         >
-          Tambah Barang
+          Tambah Institusi
         </Link>
       </div>
 
@@ -44,22 +41,12 @@ const TablePendaftaran = () => {
             <tr className="bg-gray-2 dark:bg-meta-4">
               <th className="p-2.5 text-left xl:p-5">
                 <h5 className="text-sm font-medium uppercase xsm:text-base">
-                  ID
+                  #
                 </h5>
               </th>
               <th className="p-2.5 text-left xl:p-5">
                 <h5 className="text-sm font-medium uppercase xsm:text-base">
-                  Nama
-                </h5>
-              </th>
-              <th className="p-2.5 text-left xl:p-5">
-                <h5 className="text-sm font-medium uppercase xsm:text-base">
-                  Penanggung Jawab
-                </h5>
-              </th>
-              <th className="p-2.5 text-left xl:p-5">
-                <h5 className="text-sm font-medium uppercase xsm:text-base">
-                  Stok
+                  Institusi
                 </h5>
               </th>
               <th className="p-2.5 text-left xl:p-5">
@@ -70,27 +57,21 @@ const TablePendaftaran = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((data, key) => (
-              <tr key={key}>
+            {data.map((datum, key) => (
+              <tr key={datum.id}>
                 <td className="p-2.5 xl:p-5">
-                  <p className="text-black dark:text-white">{data.id}</p>
+                  <p className="text-black dark:text-white">{key + 1}</p>
                 </td>
                 <td className="p-2.5 xl:p-5">
-                  <p className="text-black dark:text-white">{data.name}</p>
-                </td>
-                <td className="p-2.5 xl:p-5">
-                  <p className="text-black dark:text-white">{data.pj.name}</p>
-                </td>
-                <td className="p-2.5 xl:p-5">
-                  <p className="text-black dark:text-white">{data.stok}</p>
+                  <p className="text-black dark:text-white">{datum.name}</p>
                 </td>
                 <td className="p-2.5 xl:p-5">
                   <div className="flex">
                     <Link
-                      href={"#"}
-                      className="ml-1 rounded-sm bg-success p-2 text-white"
+                      href={`/institusi/edit/${datum.id}`}
+                      className="ml-1 rounded-sm bg-warning p-2 text-white"
                     >
-                      <IoDocumentText size={20} />
+                      <BsPencilSquare size={20} />
                     </Link>
                   </div>
                 </td>
@@ -101,6 +82,4 @@ const TablePendaftaran = () => {
       </div>
     </div>
   );
-};
-
-export default TablePendaftaran;
+}

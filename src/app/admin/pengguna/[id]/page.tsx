@@ -7,21 +7,20 @@ import { useParams, useRouter } from "next/navigation";
 import Loader from "@/components/common/Loader";
 import { IoClose } from "react-icons/io5";
 
-interface PjBarang {
+interface users {
   id: number;
   name: string;
-  notelp: string;
-  alamat: string;
+  email: string;
 }
 
 export default function PjBarangetail() {
-  const [data, setData] = useState<PjBarang | null>(null);
+  const [data, setData] = useState<users | null>(null);
   const params = useParams();
   const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`/api/pjBarang/${params.id}`);
+      const response = await fetch(`/api/users/${params.id}`);
       const data = await response.json();
       setData(data);
     }
@@ -34,12 +33,12 @@ export default function PjBarangetail() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`/api/pjBarang/${params.id}`, {
+      const response = await fetch(`/api/users/${params.id}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
-        router.push("/penanggungjawab");
+        router.push("/admin/pengguna");
       }
     } catch (error) {
       console.error("Failed to delete", error);
@@ -51,9 +50,9 @@ export default function PjBarangetail() {
       <div className="mx-auto w-full max-w-lg flex-1 rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <div className="mb-6 flex justify-between">
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Detail Penanggungjawab
+            Detail Admin
           </h4>
-          <Link href="/penanggungjawab" className="rounded-sm border p-1">
+          <Link href="/admin/pengguna" className="rounded-sm border p-1">
             <IoClose size={20} />
           </Link>
         </div>
@@ -72,22 +71,10 @@ export default function PjBarangetail() {
             <tbody>
               <tr>
                 <th className="p-2.5 text-left xl:p-5">
-                  <h5 className="text-sm font-medium xsm:text-base">Alamat</h5>
+                  <h5 className="text-sm font-medium xsm:text-base">Email</h5>
                 </th>
                 <td className="p-2.5 xl:p-5">
-                  <p className="text-black dark:text-white">{data.alamat}</p>
-                </td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <th className="p-2.5 text-left xl:p-5">
-                  <h5 className="text-sm font-medium xsm:text-base">
-                    No. Telpon
-                  </h5>
-                </th>
-                <td className="p-2.5 xl:p-5">
-                  <p className="text-black dark:text-white">{data.notelp}</p>
+                  <p className="text-black dark:text-white">{data.email}</p>
                 </td>
               </tr>
             </tbody>
@@ -97,13 +84,7 @@ export default function PjBarangetail() {
               <div className="flex justify-between">
                 <div className="mt-1">
                   <Link
-                    href={`https://wa.me/${data.notelp}`}
-                    className="ml-1 rounded-sm bg-success p-2 text-white"
-                  >
-                    Hubungi
-                  </Link>
-                  <Link
-                    href={`/penanggungjawab/edit/${data.id}`}
+                    href={`/admin/pengguna/edit/${data.id}`}
                     className="ml-1 rounded-sm bg-warning p-2 text-white"
                   >
                     Edit

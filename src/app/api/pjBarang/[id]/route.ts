@@ -3,15 +3,15 @@ import {prisma} from '@/lib/prisma'
 
 export async function GET(
     request: NextRequest,
-    {params}: { params: { id: string } }
+    { params }: { params: { id: string } }
 ) {
     try {
-        const user = await prisma.pjBarang.findUnique({
+        const staff = await prisma.pjBarang.findUnique({
             where: {id: parseInt(params.id)}
-        })
-        return NextResponse.json(user)
+        });
+        return NextResponse.json(staff);
     } catch (error) {
-        return NextResponse.json({error: 'User not found'}, {status: 404})
+        return NextResponse.json({error: 'Staff not found'}, {status: 404});
     }
 }
 
@@ -22,11 +22,11 @@ export async function PUT(
 ) {
     try {
         const data = await request.json()
-        const user = await prisma.pjBarang.update({
+        const staff = await prisma.pjBarang.update({
             where: {id: parseInt(params.id)},
             data
         })
-        return NextResponse.json(user)
+        return NextResponse.json(staff)
     } catch (error) {
         return NextResponse.json({error: 'Failed to update user'}, {status: 500})
     }
