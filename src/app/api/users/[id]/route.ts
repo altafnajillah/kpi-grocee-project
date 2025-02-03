@@ -6,8 +6,8 @@ export async function GET(
   { params }: { params: { id: string } },
 ) {
   try {
-    const user = await prisma.pengguna.findUnique({
-      where: { id: parseInt(params.id) },
+    const user = await prisma.user.findUnique({
+      where: { id: params.id },
     });
     return NextResponse.json(user);
   } catch (error) {
@@ -22,8 +22,8 @@ export async function PUT(
 ) {
   try {
     const data = await request.json();
-    const user = await prisma.pengguna.update({
-      where: { id: parseInt(params.id) },
+    const user = await prisma.user.update({
+      where: { id: params.id },
       data,
     });
     return NextResponse.json(user);
@@ -41,8 +41,8 @@ export async function DELETE(
   { params }: { params: { id: string } },
 ) {
   try {
-    await prisma.pengguna.delete({
-      where: { id: parseInt(params.id) },
+    await prisma.user.delete({
+      where: { id: params.id },
     });
     return NextResponse.json({ message: "User deleted successfully" });
   } catch (error) {

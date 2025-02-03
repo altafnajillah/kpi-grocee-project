@@ -87,7 +87,7 @@ const TablePendaftaran = () => {
                 <td className="p-2.5 xl:p-5">
                   <div className="flex">
                     <Link
-                      href={"#"}
+                      href={`/barang/pendaftaran/${data.id}`}
                       className="ml-1 rounded-sm bg-success p-2 text-white"
                     >
                       <IoDocumentText size={20} />

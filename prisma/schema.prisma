@@ -25,19 +25,102 @@ model PjBarang {
 model Institusi {
   id   Int    @id @default(autoincrement())
   name String
+
+  Peminjaman Peminjaman[]
 }
 
 model Barang {
-  id   String   @id
-  name String
-  stok Int
-  pjId Int
-  pj   PjBarang @relation(fields: [pjId], references: [id])
+  id      String   @id
+  name    String
+  stok    Int
+  pjId    Int
+  image   String?
+  pj      PjBarang @relation(fields: [pjId], references: [id], onDelete: Cascade)
+
+  Peminjaman Peminjaman[]
+
+  Jadwal Jadwal[]
 }
 
-model Pengguna {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
-  pass  String 
+// AUTH JS
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String  @map("user_id")
+  type               String
+  provider           String
+  providerAccountId  String  @map("provider_account_id")
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+ 
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@map("sessions")
+}
+ 
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  password      String
+  role          String    @default("admin")
+  accounts      Account[]
+  sessions      Session[]
+ 
+  @@map("users")
+} 
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// END AUTHJS
+
+model Peminjaman {
+  id          Int       @id @default(autoincrement())
+  tglPinjam   DateTime
+  tglKembali  DateTime
+  peminjam    String
+  status      Int       @default(0)
+  stok        Int
+  ktp         String?
+  sPinjam     String?
+  sSetuju     String?
+  ket         String
+  barangId    String
+  instansiId  Int
+  barang      Barang    @relation(fields: [barangId], references: [id], onDelete: Cascade)
+  instansi    Institusi @relation(fields: [instansiId], references: [id], onDelete: Cascade)
+}
+
+model Jadwal {
+  id          Int       @id @default(autoincrement())
+  tglPinjam   DateTime
+  tglKembali  DateTime
+  stok        Int
+  barangId    String
+  barang      Barang    @relation(fields: [barangId], references: [id], onDelete: Cascade)
 }

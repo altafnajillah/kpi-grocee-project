@@ -12,6 +12,7 @@
 # next.js
 /.next/
 /out/
+.next
 
 # production
 /build
@@ -42,3 +43,6 @@ yarn.lock
 # IDE
 #.vscode
 /.idea/
+
+# prisma Migration
+/prisma/migrations

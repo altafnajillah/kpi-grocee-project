@@ -1,20 +1,20 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import FormCreateDaftarBarang from "@/components/FormElements/FormCreateDaftarBarang";
+import FormEditDaftarBarang from "@/components/FormElements/FormEditDaftarBarang";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Pendaftaran Barang",
+  title: "Edit Barang",
 };
 
-const BarangCreate = () => {
+const EditDaftarBarangPage = () => {
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Pendaftaran Barang" />
-      <FormCreateDaftarBarang />
+      <Breadcrumb pageName="Edit Barang" />
+      <FormEditDaftarBarang />
     </DefaultLayout>
   );
 };
 
-export default BarangCreate;
+export default EditDaftarBarangPage;

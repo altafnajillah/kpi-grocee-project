@@ -3,11 +3,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const users = await prisma.user.findMany();
-    return NextResponse.json(users);
+    const peminjaman = await prisma.peminjaman.findMany({
+      include: {
+        barang: true,
+        instansi: true,
+      },
+    });
+    return NextResponse.json(peminjaman);
   } catch (error) {
     return NextResponse.json(
-      { error: `Failed to fetch users ${error}` },
+      { error: "Failed to fetch peminjaman" },
       { status: 500 },
     );
   }
@@ -16,11 +21,11 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    const user = await prisma.user.create({ data });
-    return NextResponse.json(user, { status: 201 });
+    const peminjaman = await prisma.peminjaman.create({ data });
+    return NextResponse.json(peminjaman, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to create user" },
+      { error: "Failed to create peminjaman" },
       { status: 500 },
     );
   }

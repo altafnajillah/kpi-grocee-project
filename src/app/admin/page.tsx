@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Beranda from "@/components/Dashboard/Beranda";
+import HelloUser from "@/components/HelloUser";
 
 export const metadata: Metadata = {
   title: "Beranda Admin",
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <DefaultLayout>
         <Beranda />
+        <HelloUser />
       </DefaultLayout>
     </>
   );
