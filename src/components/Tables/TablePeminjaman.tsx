@@ -7,11 +7,13 @@ import { IoDocumentText } from "react-icons/io5";
 import { formatDate } from "@/lib/utils";
 
 interface Peminjaman {
+  id: string;
   tglPinjam: Date;
   tglKembali: Date;
   barang: { name: string };
+  stok: number;
   instansi: { name: string };
-  notelp: string;
+  status: number;
   ket: string;
 }
 
@@ -75,6 +77,11 @@ const TablePeminjaman = () => {
                   Peminjam
                 </h5>
               </th>
+              <th className="p-2.5 text-center sm:table-cell xl:p-5">
+                <h5 className="text-sm font-medium uppercase xsm:text-base">
+                  Status
+                </h5>
+              </th>
               <th className="p-2.5 text-left sm:table-cell xl:p-5">
                 <h5 className="text-sm font-medium uppercase xsm:text-base">
                   Aksi
@@ -103,17 +110,38 @@ const TablePeminjaman = () => {
                   </p>
                 </td>
                 <td className="p-2.5 text-left xl:p-5">
-                  <p className="text-black">{datum.barang.name}</p>
+                  <p className="text-black">{`${datum.barang.name} ${datum.stok > 1 ? `(${datum.stok})` : ""}`}</p>
                 </td>
                 <td className="p-2.5 text-left xl:p-5">
                   <p className="text-black dark:text-white">
                     {datum.instansi.name}
                   </p>
                 </td>
+                <td className="p-2.5 text-center xl:p-5">
+                  <p
+                    className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium ${
+                      datum.status == 0
+                        ? "bg-primary text-primary"
+                        : datum.status == 1
+                          ? "bg-warning text-warning"
+                          : datum.status == 2
+                            ? "bg-success text-success"
+                            : "bg-danger text-danger"
+                    }`}
+                  >
+                    {datum.status == 0
+                      ? "Terjadwal"
+                      : datum.status == 1
+                        ? "Terpinjam"
+                        : datum.status == 2
+                          ? "Selesai"
+                          : "Batal"}
+                  </p>
+                </td>
                 <td className="p-2.5 xl:p-5">
                   <div className="flex">
                     <Link
-                      href={"#"}
+                      href={`/barang/peminjaman/${datum.id}`}
                       className="ml-1 rounded-sm bg-success p-2 text-white"
                     >
                       <IoDocumentText size={20} />

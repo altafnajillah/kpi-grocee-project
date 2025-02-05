@@ -1,24 +1,27 @@
-import { PEMINJAMAN } from "@/types/peminjaman";
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { IoDocumentText } from "react-icons/io5";
 import Link from "next/link";
+import { formatDate } from "@/lib/utils";
 
-const peminjamanData: PEMINJAMAN[] = [
-  {
-    tglpinjam: "4 Januari 2025",
-    tglkembali: "4 Januari 2025",
-    barang: "Ruang Teater",
-    peminjam: "Fakultas Teknik",
-    notelp: "081234567890",
-    ket: "Seminar KPI Informatika",
-  },
-];
+interface Peminjaman {
+  id: string;
+  tglPinjam: Date;
+  tglKembali: Date;
+  barang: { name: string };
+  stok: number;
+  instansi: { name: string };
+  status: number;
+  ket: string;
+}
 
-const TableBeranda = () => {
+const TablePeminjamanBerakhir = ({ data }: { data: Peminjaman[] }) => {
+
   return (
     <div className="rounded-sm border border-stroke bg-red-50 px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="mb-6 flex flex-wrap items-center justify-between ">
-        <h4 className="text-xl font-bold dark:text-white text-red-700">
+        <h4 className="text-xl font-bold text-red-700 dark:text-white">
           Peminjaman Berakhir
         </h4>
       </div>
@@ -60,38 +63,33 @@ const TableBeranda = () => {
             </tr>
           </thead>
           <tbody>
-            {peminjamanData.map((data, key) => (
-              <tr
-                key={key}
-                className={`${
-                  key === peminjamanData.length - 1
-                    ? ""
-                    : "border-b border-stroke dark:border-strokedark"
-                } bg-red-100`}
-              >
+            {data.map((datum, key) => (
+              <tr key={key}>
                 <td className="p-2.5 text-left xl:p-5">
                   <p className="text-black dark:text-white">
-                    {data.tglkembali.toString()}
+                    {formatDate(datum.tglPinjam.toString())}
                   </p>
                 </td>
                 <td className="p-2.5 text-left xl:p-5">
                   <p className="text-black dark:text-white">
-                    {data.tglkembali.toString()}
+                    {formatDate(datum.tglKembali.toString())}
                   </p>
                 </td>
                 <td className="p-2.5 text-left xl:p-5">
-                  <p className="text-black">{data.barang}</p>
+                <p className="text-black">{`${datum.barang.name} ${datum.stok > 1 ? `(${datum.stok})` : ""}`}</p>
                 </td>
                 <td className="p-2.5 text-left xl:p-5">
-                  <p className="text-black dark:text-white">{data.peminjam}</p>
+                  <p className="text-black dark:text-white">
+                    {datum.instansi.name}
+                  </p>
                 </td>
-                {/*<td className="p-2.5 text-left xl:p-5">*/}
-                {/*    <p className="text-black">{data.ket}</p>*/}
-                {/*</td>*/}
                 <td className="">
                   <div className="flex p-2.5 sm:flex xl:p-5">
-                    <Link href={"#"} className={"bg-success p-2 rounded-sm text-white ml-1"}>
-                      <IoDocumentText size={20}/>
+                    <Link
+                      href={`/barang/peminjaman/${datum.id}`}
+                      className={"ml-1 rounded-sm bg-success p-2 text-white"}
+                    >
+                      <IoDocumentText size={20} />
                     </Link>
                   </div>
                 </td>
@@ -104,4 +102,4 @@ const TableBeranda = () => {
   );
 };
 
-export default TableBeranda;
+export default TablePeminjamanBerakhir;

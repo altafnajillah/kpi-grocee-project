@@ -13,7 +13,6 @@ export default function Home() {
         <>
             <DefaultLayout>
                 <Breadcrumb pageName="Riwayat"/>
-
                 <TableRiwayat/>
             </DefaultLayout>
         </>

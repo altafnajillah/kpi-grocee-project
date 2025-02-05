@@ -8,6 +8,7 @@ interface Peminjaman {
   tglPinjam: Date;
   tglKembali: Date;
   barang: { name: string };
+  stok: number;
   instansi: { name: string };
   notelp: string;
   ket: string;
@@ -18,7 +19,7 @@ const TablePublic = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/api/peminjaman");
+      const response = await fetch("/data");
       const data = await response.json();
       setData(data);
     }
@@ -95,7 +96,7 @@ const TablePublic = () => {
                   </p>
                 </td>
                 <td className="p-2.5 text-left xl:p-5">
-                  <p className="text-black">{datum.barang.name}</p>
+                  <p className="text-black">{`${datum.barang.name} ${datum.stok > 1 ? `(${datum.stok})` : ""}`}</p>
                 </td>
                 <td className="p-2.5 text-left sm:table-cell xl:p-5">
                   <p className="text-black dark:text-white">

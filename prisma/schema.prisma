@@ -100,10 +100,11 @@ model VerificationToken {
 // END AUTHJS
 
 model Peminjaman {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(cuid())
   tglPinjam   DateTime
   tglKembali  DateTime
   peminjam    String
+  whatsapp    String
   status      Int       @default(0)
   stok        Int
   ktp         String?

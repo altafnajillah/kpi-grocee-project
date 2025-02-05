@@ -197,7 +197,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Log Out",
-        route: "/api/auth/signout",
+        route: "/auth/signout",
       },
     ],
   },
