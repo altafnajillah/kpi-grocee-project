@@ -21,6 +21,7 @@ export default function PjBarang() {
     async function fetchData() {
       const response = await fetch("api/pjBarang");
       const data = await response.json();
+      // const data = await getPjBarang();
       setData(data);
     }
     fetchData().then();

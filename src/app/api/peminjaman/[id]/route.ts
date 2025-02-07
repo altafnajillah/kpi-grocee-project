@@ -37,9 +37,7 @@ export async function PUT(
     const data = await request.json();
     const peminjaman = await prisma.peminjaman.update({
       where: { id: params.id },
-      data: {
-        status: parseInt(data.status),
-      },
+      data,
     });
     return NextResponse.json(peminjaman);
   } catch (error) {

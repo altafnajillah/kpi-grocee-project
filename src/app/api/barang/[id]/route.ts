@@ -41,8 +41,7 @@ export async function PUT(
     return NextResponse.json(barang);
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to update barang" },
-      { status: 500 },
+      { error: "Failed to update barang" + error },
     );
   }
 }

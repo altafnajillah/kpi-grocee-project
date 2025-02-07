@@ -1,10 +1,10 @@
 "use client";
 
 import { signUpCredentials } from "@/lib/auth";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 function FormCreateAdmin() {
-  const [state, formAction] = useFormState(signUpCredentials, null);
+  const [state, formAction] = useActionState(signUpCredentials, null);
   return (
     <div className="mx-auto max-w-screen-2xl p-4">
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">

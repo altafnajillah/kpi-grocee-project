@@ -20,7 +20,6 @@ interface Peminjaman {
   status: number;
   ket: string;
 }
-
 const PeminjamanDetailPage = () => {
   const [peminjaman, setPeminjaman] = useState<Peminjaman>();
   const params = useParams();
@@ -37,21 +36,22 @@ const PeminjamanDetailPage = () => {
 
   if (!peminjaman) return <Loader />;
 
-  const updateStatus = async (newStatus: number) => {
+  const handleUpdate = async (e: React.FormEvent, status: number) => {
+    e.preventDefault();
     try {
-      const response = await fetch(`/api/peminjaman/${peminjaman.id}`, {
+      const response = await fetch(`/api/peminjaman/${params.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          status: newStatus,
+          status,
         }),
       });
 
       if (response.ok) {
-        router.push(`/barang/peminjaman/${params.id}`);
+        router.push(`/barang/peminjaman`);
       }
     } catch (error) {
-      console.error("Failed to update status", error);
+      console.error("Failed to update data", error);
     }
   };
 
@@ -63,7 +63,6 @@ const PeminjamanDetailPage = () => {
             <h4 className="text-xl font-semibold text-black dark:text-white">
               Detail Peminjaman
             </h4>
-            {/* <div className="ml-2 p-2.5 text-center xl:p-5"> */}
             <p
               className={`ml-2 inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium ${
                 peminjaman.status == 0
@@ -83,7 +82,6 @@ const PeminjamanDetailPage = () => {
                     ? "Selesai"
                     : "Batal"}
             </p>
-            {/* </div> */}
           </div>
           <button
             onClick={() => router.back()}
@@ -93,24 +91,32 @@ const PeminjamanDetailPage = () => {
           </button>
         </div>
 
-        <form>
+        <form onSubmit={(e) => handleUpdate(e, 1)}>
           <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
             <div className="w-full xl:w-1/2">
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                 Tanggal Peminjaman
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {formatDate(peminjaman.tglPinjam.toString())}
-              </p>
+              <input
+                value={formatDate(peminjaman.tglPinjam.toString())}
+                type="text"
+                placeholder="Kontak Whatsapp peminjam"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
             </div>
 
             <div className="w-full xl:w-1/2">
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                 Tanggal Pengembalian
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {formatDate(peminjaman.tglKembali.toString())}
-              </p>
+              <input
+                value={formatDate(peminjaman.tglKembali.toString())}
+                type="text"
+                placeholder="Kontak Whatsapp peminjam"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
             </div>
           </div>
 
@@ -119,18 +125,26 @@ const PeminjamanDetailPage = () => {
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                 Peminjam
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {peminjaman.peminjam}
-              </p>
+              <input
+                value={peminjaman.peminjam}
+                type="text"
+                placeholder="Nama peminjam"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
             </div>
 
             <div className="w-full xl:w-1/2">
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                 Whatsapp
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {peminjaman.whatsapp}
-              </p>
+              <input
+                value={peminjaman.whatsapp}
+                type="text"
+                placeholder="Kontak Whatsapp peminjam"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
             </div>
           </div>
 
@@ -138,21 +152,33 @@ const PeminjamanDetailPage = () => {
             {/* Selected */}
             <div className="w-full xl:w-1/2">
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                Barang
+                Pilih Barang
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {peminjaman.barang.name}
-              </p>
-            </div>
 
+              <input
+                value={peminjaman.barang.name}
+                type="text"
+                placeholder="Kontak Whatsapp peminjam"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
+            </div>
+            {/* End Selected */}
+
+            {/* Selected */}
             <div className="w-full xl:w-1/2">
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                Instansi
+                Pilih Instansi
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {peminjaman.instansi.name}
-              </p>
+              <input
+                value={peminjaman.instansi.name}
+                type="text"
+                placeholder="Kontak Whatsapp peminjam"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
             </div>
+            {/* End Selected */}
           </div>
 
           <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
@@ -160,24 +186,31 @@ const PeminjamanDetailPage = () => {
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                 Banyak Dipinjam
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {peminjaman.stok}
-              </p>
+              <input
+                value={peminjaman.stok}
+                type="number"
+                placeholder="Stok"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
             </div>
             <div className="w-full xl:w-1/2">
               <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                 Keterangan
               </label>
-              <p className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal">
-                {peminjaman.ket}
-              </p>
+              <input
+                value={peminjaman.ket}
+                type="text"
+                placeholder="Keterangan Peminjaman"
+                className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                disabled
+              />
             </div>
           </div>
-
           <div className="mb-2 flex justify-between">
             {peminjaman.status == 0 ? (
               <button
-                onClick={() => updateStatus(2)}
+                onClick={(e) => handleUpdate(e, 3)} // status to 3
                 className="rounded-md bg-danger px-4 py-2 text-white"
               >
                 Batal
@@ -207,14 +240,14 @@ const PeminjamanDetailPage = () => {
 
               {peminjaman.status == 0 ? (
                 <button
-                  onClick={() => updateStatus(1)}
+                  onClick={(e) => handleUpdate(e, 1)} // status to 1
                   className="rounded-md bg-primary px-4 py-2 text-white"
                 >
                   Terpinjam
                 </button>
-              ) : peminjaman.status == 0 ? (
+              ) : peminjaman.status == 1 ? (
                 <button
-                  onClick={() => updateStatus(2)}
+                  onClick={(e) => handleUpdate(e, 2)} // status to 2
                   className="rounded-md bg-primary px-4 py-2 text-white"
                 >
                   Selesai

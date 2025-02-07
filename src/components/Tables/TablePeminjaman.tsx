@@ -5,6 +5,7 @@ import { FaPlus, FaSearch } from "react-icons/fa";
 import Link from "next/link";
 import { IoDocumentText } from "react-icons/io5";
 import { formatDate } from "@/lib/utils";
+import SearchComponent from "../Search";
 
 interface Peminjaman {
   id: string;
@@ -17,7 +18,15 @@ interface Peminjaman {
   ket: string;
 }
 
-const TablePeminjaman = () => {
+const TablePeminjaman = ({
+  searchParams,
+}: {
+  searchParams?: { query?: string; page?: string };
+}) => {
+
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+
   const [data, setData] = useState<Peminjaman[]>([]);
 
   useEffect(() => {
@@ -36,14 +45,7 @@ const TablePeminjaman = () => {
           Jadwal Peminjaman
         </h4>
         <div className="flex">
-          <input
-            type="text"
-            placeholder="Cari peminjaman..."
-            className="mr-2 w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-          />
-          <button className="mr-2 rounded-md bg-primary px-4 py-2 text-white">
-            <FaSearch />
-          </button>
+          <SearchComponent />
           <Link
             href={"/barang/peminjaman/create"}
             className="rounded-md bg-warning px-4 py-3 text-white"
